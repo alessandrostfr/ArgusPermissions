@@ -18,4 +18,8 @@ class Role extends Model
     public function users(){
         return $this->belongsToMany('App\User')->withTimesTamps();
     }
+
+    public function permissions(){
+        return $this->belongsToMany('App\ArgusPermission\Models\Permission')->withTimesTamps();
+    }
 }
