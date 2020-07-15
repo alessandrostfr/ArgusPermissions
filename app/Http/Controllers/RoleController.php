@@ -19,13 +19,14 @@ class RoleController extends Controller
 
     public function create()
     {
-        //
+        $permissions = Permission::get();
+        return view('role.create', compact('permissions'));
     }
 
 
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
 
