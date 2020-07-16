@@ -117,7 +117,7 @@ class ArgusPermissionsInfoSeeder extends Seeder
         // $permission_all[] =$permission->id;
 
         //Creamos la relacion entre la tabla permissions y roles para nuestro rol admin
-        $roladmin->permissions()->sync( $permission_all );
+        //$roladmin->permissions()->sync( $permission_all );
 
     }
 }
