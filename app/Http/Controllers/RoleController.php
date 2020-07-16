@@ -18,7 +18,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        $roles = Role::orderBy('id')->paginate(2);
+        $roles = Role::orderBy('id', 'Desc')->paginate(2);
         return view('role.index', compact('roles'));
     }
 
@@ -53,9 +53,16 @@ class RoleController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        $permission_role=[];
+        foreach($role->permissions as $permission){
+            $permission_role[]=$permission->id;
+        }
+        
+        
+        $permissions = Permission::get();
+        return view('role.show', compact('permissions','role','permission_role'));
     }
 
 
@@ -97,9 +104,10 @@ class RoleController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return redirect()->route('role.index')->with('status_success', 'Role successfully removed');
     }
     
 }

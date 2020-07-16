@@ -6,7 +6,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Edit Role</h2>
+                    <form action="{{ route('role.destroy', $role->id) }}" method="POST" >
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-outline-danger float-right">Delete</button>
+                    </form>
+                    <a style="margin-right:15px;" href="{{ route('role.edit', $role->id) }}" class="btn btn-outline-info btn float-right">Edit</a>
+                    <h2>Show Role {{ $role->id }}</h2>
+                    
                 </div>
                 <div class="card-body">
                     @include('custom.message')
@@ -22,6 +29,7 @@
                                     class="form-control" 
                                     id="name" placeholder="name" 
                                     name="name" value="{{ old('name', $role->name) }}"
+                                    readonly
                                 >
                             </div>
                             
@@ -29,16 +37,18 @@
                                 <input type="text" 
                                     class="form-control" 
                                     id="slug" placeholder="slug" 
-                                    name="slug" value="{{ old('slug', $role->slug) }}">
+                                    name="slug" value="{{ old('slug', $role->slug) }}"
+                                    readonly    
+                                >
                             </div>
                             
-                            <div class="form-group">
-                                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Descripcion" >{{old('description', $role->description)}}</textarea>
+                            <div class="form-group" >
+                                <textarea readonly class="form-control" id="description" name="description" rows="3" placeholder="Descripcion" >{{old('description', $role->description)}}</textarea>
                             </div>
                             
                             <h4>Full Access</h4>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="fullaccessyes" name="full-access" class="custom-control-input" value="yes"
+                                <input disabled type="radio" id="fullaccessyes" name="full-access" class="custom-control-input" value="yes"
                                     @if($role['full-access'] == "yes")
                                         checked
                                     @elseif(old('full-access') == "yes")
@@ -49,12 +59,13 @@
                             </div>
                             
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="fullaccessno" name="full-access" class="custom-control-input" value="no" 
+                                <input disabled type="radio" id="fullaccessno" name="full-access" class="custom-control-input" value="no" 
                                     @if($role['full-access'] == 'no')
                                         checked
                                     @elseif(old('full-access') == "no")
                                         checked
                                     @endif
+                                    readonly
                                     
                                 >
                                 <label class="custom-control-label" for="fullaccessno"  >No</label>
@@ -67,6 +78,7 @@
                             @foreach ( $permissions as $permission)
                                 <div class="custom-control custom-checkbox">
                                 <input 
+                                    disabled
                                     type="checkbox" 
                                     class="custom-control-input" 
                                     name="permission[]" 
@@ -77,6 +89,7 @@
                                     @elseif(is_array($permission_role) && in_array("$permission->id", $permission_role)  )
                                     checked
                                     @endif
+                                    
                                 >
                                 <label class="custom-control-label" for="permission_{{ $permission->id }}">
                                     {{ $permission->id . " " }}<strong>{{ $permission->name }}</strong> {{  "-" }}<em>{{ $permission->description }}</em>
@@ -85,10 +98,8 @@
                             @endforeach
                             
                             <hr>
-                            
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-outline-success float-right" value="Save">
-                            </div>
+
+                            <a style="margin-right:15px;" href="{{ route('role.index') }}" class="btn btn-secondary btn-sm float-left">Back</a>
                             
                         </div>
                     </form>
