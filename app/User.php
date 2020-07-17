@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\ArgusPermission\Traits\UserTrait;
 
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserTrait;
+    
 
     /**
      * The attributes that are mass assignable.
@@ -38,7 +40,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
-        return $this->belongsToMany('App\ArgusPermission\Models\Role')->withTimesTamps();
-    }
 }

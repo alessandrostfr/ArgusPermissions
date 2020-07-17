@@ -77,7 +77,7 @@
                             <hr>
                             
                             <div class="form-group">
-                                <input type="submit" class="btn btn-outline-success float-right" value="Guardar">
+                                <input type="submit" class="btn btn-outline-success float-right" value="Save">
                             </div>
                             
                         </div>
