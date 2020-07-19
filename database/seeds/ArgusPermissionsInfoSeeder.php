@@ -44,6 +44,14 @@ class ArgusPermissionsInfoSeeder extends Seeder
             'full-access' => 'yes'
         ]);
 
+        //Rol Registered Users
+        $roluser=Role::create([
+            'name' => 'Registered Users', 
+            'slug' => 'registereduser', 
+            'description' => 'Registered Users', 
+            'full-access' => 'no'
+        ]);
+
         //Creamos la relacion entre la tabla users y roles para nuestro usuario admin
         $useradmin->roles()->sync([$roladmin->id]);
 
