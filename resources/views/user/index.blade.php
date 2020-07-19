@@ -34,14 +34,28 @@
                                                 <p>N/A</p>
                                             @endempty
                                         </td>
-                                        <td><a href="{{ route('user.show', $user->id) }}" class="btn btn-light btn-sm">Show</a></td>
-                                        <td><a href="{{ route('user.edit', $user->id) }}" class="btn btn-secondary btn-sm">Edit</a></td>
                                         <td>
-                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                            @can('view', [$user, ['user.show','userown.show']])
+                                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-light btn-sm">Show</a>
+                                            @endcan
+                                        </td>
+                                        <td>
+                                            @can('update', [$user, ['user.edit','userown.edit']])
+                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                                            @endcan
+                                        </td>
+                                        <td>
+                                            @can('haveaccess', 'user.destroy')
+                                                <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm">Delete</button>
                                             </form>
+                                            @endcan
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach

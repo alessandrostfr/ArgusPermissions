@@ -109,6 +109,23 @@ class ArgusPermissionsInfoSeeder extends Seeder
             'description' => 'A user can destroy users',
         ]);
         $permission_all[] =$permission->id;
+
+        //New
+        $permission = Permission::create([
+            'name' => 'Show own user',
+            'slug' => 'userown.show',
+            'description' => 'A user can see own user',
+        ]);
+        $permission_all[] =$permission->id;
+        $permission = Permission::create([
+            'name' => 'Edit own user',
+            'slug' => 'userown.edit',
+            'description' => 'A user can Edit own user',
+        ]);
+        $permission_all[] =$permission->id;
+
+
+
         // $permission = Permission::create([
         //     'name' => 'Create user',
         //     'slug' => 'user.create',

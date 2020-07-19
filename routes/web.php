@@ -37,7 +37,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/role', 'RoleController')->names('role');
 Route::resource('/user', 'UserController', [
     'except' =>[
-        'create',
+        'crete',
         'store'
     ]
 ])->names('user');
