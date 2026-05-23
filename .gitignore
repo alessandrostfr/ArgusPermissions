@@ -10,3 +10,14 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+# IDE / OS
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
+# Local databases and generated artifacts
+*.sqlite
+*.sqlite-journal
+/storage/logs/*.log
